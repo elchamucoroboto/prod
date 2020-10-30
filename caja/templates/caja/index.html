@@ -76,7 +76,19 @@
     </tr>
   </thead>
   <tbody>
+
+        <tr>
+
+      
+      <td>DOLAR DEL DIA:</td>
+      <td class="op-amount">{{tasa_del_dia}}</td>
+      
+    </tr>
     <tr>
+
+    
+    <tr>
+
       
       <td>ZELLE:</td>
       <td class="op-amount">{{sumZelle}}</td>
@@ -131,8 +143,25 @@
       
     </tr>
 
+          <td><strong> VENTA TOTAL BsS. (en dolares):</strong></td>
+  <strong>    <td class="op-amount font-weight-bold">{{venta_bolivares_dolares}}</td> </strong>
+      
+    </tr>
+
+        <tr>
+      <th scope="col" colspan=2 class='text-center "thead-dark"'>TOTAL VENTA APROX:</th>
+
+    </tr>
+            <tr>
+      <th scope="col" colspan=2 class='text-center op-amount'>{{venta_aprox}}</th>
+
+    </tr>
+
+
   </tbody>
 </table>
+
+
 
 {% endblock %}
 

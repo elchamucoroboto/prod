@@ -22,14 +22,18 @@ def index(request):
     listValesBs = [0]
     fondoCajaD = 0.00
     fondoCajaBs = 0.00
+    tasa_del_dia = 0.00001
     sumValesD = 0.00
     sumValesBs = 0.00
     sumZelle = 0.00
     sumPunto = 0.00
     sumEfectivoD = 0.00
     sumEfectivoBS = 0.00
+    venta_bolivares_dolares = 0.00
     venta_total_dolares = 0.00
     venta_total_bolivares = 0.00
+    venta_aprox = 0.0
+    
 
     def floatToNegative(monto):
 
@@ -90,6 +94,10 @@ def index(request):
                 fondoCajaD = op.monto
 
         for op in operations:
+            if 'DOLAR DEL DIA' == op.metodo:
+                tasa_del_dia = op.monto
+
+        for op in operations:
             if 'VALE EN DOLARES' in op.metodo:
                 listValesD.append(op.monto)
                 sumValesD = sum(listValesD)
@@ -102,7 +110,9 @@ def index(request):
         #TOTALES
         venta_total_bolivares = sumEfectivoBS+sumPunto
         venta_total_dolares = sumZelle+sumEfectivoD
-        dolares_en_caja = fondoCajaD + sumEfectivoD + sumValesD
+        venta_bolivares_dolares = venta_total_bolivares / tasa_del_dia
+        venta_aprox = venta_total_dolares + venta_bolivares_dolares
+        dolares_en_caja = fondoCajaD + sumEfectivoD + sumValesD 
         bs_en_caja = fondoCajaBs + sumEfectivoBS + sumValesBs
 
         context = {'operations': operations,
@@ -117,7 +127,10 @@ def index(request):
                     'fondoCajaBs':fondoCajaBs,
                     'dolares_en_caja': dolares_en_caja,
                     'bs_en_caja': bs_en_caja,
-                    'sumValesD': sumValesD
+                    'sumValesD': sumValesD,
+                    'venta_bolivares_dolares': venta_bolivares_dolares,
+                    'tasa_del_dia' : tasa_del_dia,
+                    'venta_aprox' : venta_aprox
                     }
 
         template = loader.get_template('caja/index.html')
@@ -141,6 +154,11 @@ def index(request):
             
             if 'FONDO CAJA DOLARES' == metodo:
                 fondoCajaD = monto
+
+            if 'DOLAR DEL DIA' == metodo:
+                tasa_del_dia = monto
+
+
 
 
 
@@ -169,6 +187,7 @@ def informes(request):
     sumEfectivoBS = 0.00
     venta_total_dolares = 0.00
     venta_total_bolivares = 0.00
+    tasa_del_dia = 0.0
     
     if request.method == 'POST':
         form = fechaForm(request.POST)
@@ -211,6 +230,8 @@ def informes(request):
             for op in operations:
                 if 'FONDO CAJA DOLARES' == op.metodo:
                     fondoCajaD = op.monto
+
+
 
             
 
