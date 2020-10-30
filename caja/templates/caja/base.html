@@ -105,10 +105,10 @@
 <script>
 
 // cambia color segun metodo
-  var colores = ["list-group-item-success","list-group-item-danger","list-group-item-warning"]
+  var colores = ["table-success","table-danger","table-warning"]
 
   
-  var classColor = document.getElementsByClassName("list-group-item");
+  var classColor = document.getElementsByClassName("tabla");
   for (var i = 0; i < classColor.length; i++){
     if (classColor[i].innerHTML.indexOf('ZELLE') > -1 || classColor[i].innerHTML.indexOf('DOLARES') > -1){
       classColor[i].className += " " +colores[0]

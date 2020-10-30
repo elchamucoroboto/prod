@@ -35,19 +35,53 @@
 
 {% block operaciones %}
 
-    {% if operations %}
-    <ul class='list-group'> 
-        {% for op in operations %}
-        
-        <li class='list-group-item'><strong>{{ op.fecha|date:"SHORT_DATE_FORMAT" }} || <span class="op-amount"> {{op.monto}} </span> || {{op.metodo}} || {{op.motivo}}</strong></li></li>
 
-        {% endfor %}
-    </ul>
-    {%endif%}
+   
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Metodo</th>
+      <th scope="col">Motivo</th>
+      <th scope="col">Monto</th>
+         {% if operations %}
+    </tr>
+  </thead>
+  <tbody>
+     {% for op in operations %}
+    <tr class="tabla">
+      <th scope="row">{{ op.fecha|date:"SHORT_DATE_FORMAT" }} </th>
+      <td>{{op.metodo}}</td>
+      <td>{{op.motivo}}</td>
+      <td><span class="op-amount"> {{op.monto}} </span></td>
+
+  </tbody>
+  {% endfor %}
+   {%endif%}
+
+
+</table>
 
     {% endblock %}
 
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Metodo</th>
+      <th scope="col">Motivo</th>
+      <th scope="col">Monto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">2020-10-30</th>
+      <td>ZELLE</td>
+      <td>VENTA</td>
+      <td>500,00</td>
 
+  </tbody>
+</table>
 <!--
 
 
