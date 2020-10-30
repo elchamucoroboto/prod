@@ -1,0 +1,52 @@
+{% extends 'caja/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{%block opform%}
+
+    <form action=""  autocomplete="off" method="POST">
+                    {% csrf_token %}
+                      <div class="form-row">
+                        <div class="col-4">
+                          {{form.desde|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-4">
+                          
+                          {{form.hasta|as_crispy_field}}
+                        </div>
+
+                        <div class="col-4 mt-4">
+                          <button class="btn btn-success btn-block">Enviar</button>
+                        </div>
+                      </div>
+                    </form>
+    {%endblock%}
+
+
+    {% block operaciones %}
+
+    {% if operations %}
+    <ul class='list-group'> 
+        {% for op in operations %}
+        
+        <li class='list-group-item'><strong>{{ op.fecha|date:"SHORT_DATE_FORMAT" }} || <span class="op-amount"> {{op.monto}} </span> || {{op.metodo}} || {{op.motivo}}</strong></li></li>
+
+        {% endfor %}
+    </ul>
+    {%endif%}
+
+    {% endblock %}
+
+    {% block totales %}
+    <h5>Fondo Caja Dolares: {{fondoCajaD}}</h5>
+    <h5>Fondo Caja Bolivares: {{fondoCajaBs}}</h5>
+    <h5>Total Zelle: {{sumZelle}}</h5>
+    <h5>Total Punto: {{sumPunto}}</h5>
+    <h5>Total Efectivo Dolares: {{sumEfectivoD}}</h5>
+    <h5>Total Dolares: {{venta_total_dolares}}</h5>
+    <h5>Total Bolivares {{venta_total_bolivares}}</h5>
+    {% endblock %}
+
+
+

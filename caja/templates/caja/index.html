@@ -1,0 +1,148 @@
+{% extends 'caja/base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+
+{% block opform %}
+
+
+
+    <form action=""  autocomplete="off" method="POST">
+                    {% csrf_token %}
+                      <div class="form-row">
+                        <div class="col-3">
+                          {{form.monto|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-3">
+                          
+                          {{form.metodo|as_crispy_field}}
+                        </div>
+                        <div class="col-3">
+                          {{form.motivo|as_crispy_field}}
+                        </div>
+                        <div class="col-3 mt-4">
+                          <button class="btn btn-success btn-block">Enviar</button>
+                        </div>
+                      </div>
+                    </form>
+
+{% endblock %}
+
+
+
+
+{% block operaciones %}
+
+    {% if operations %}
+    <ul class='list-group'> 
+        {% for op in operations %}
+        
+        <li class='list-group-item'><strong>{{ op.fecha|date:"SHORT_DATE_FORMAT" }} || <span class="op-amount"> {{op.monto}} </span> || {{op.metodo}} || {{op.motivo}}</strong></li></li>
+
+        {% endfor %}
+    </ul>
+    {%endif%}
+
+    {% endblock %}
+
+
+<!--
+
+
+
+    fondoCajaD = 0.00
+    fondoCajaBs = 0.00
+    sumValesD = 0.00
+    sumValesBs = 0.00
+    sumZelle = 0.00
+    sumPunto = 0.00
+    sumEfectivoD = 0.00
+    sumEfectivoBS = 0.00
+    venta_total_dolares = 0.00
+    venta_total_bolivares = 0.00
+
+  //-->
+
+
+    {% block totales %}
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" colspan=2 class='text-center'>TOTALES:</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      
+      <td>ZELLE:</td>
+      <td class="op-amount">{{sumZelle}}</td>
+      
+    </tr>
+    <tr>
+      
+      <td>PUNTO DE VENTA</td>
+      <td class="op-amount">{{sumPunto}}</td>
+      
+    </tr>
+    <tr>
+      
+      <td>TOTAL EFECTIVO $</td>
+      <td class="op-amount">{{sumEfectivoD}}</td>
+      
+    </tr>
+        <tr>
+      
+      <td>TOTAL EFECTIVO BsS.</td>
+      <td class="op-amount">{{sumEfectivoBS}}</td>
+      
+    </tr>
+        <tr>
+      
+      <td>TOTAL VALES:</td>
+      <td class="op-amount">{{sumValesD}}</td>
+      
+    </tr>
+
+        </tr>
+        <tr>
+      
+
+            <td><strong> EFECTIVO EN CAJA ($):</strong></td>
+      <td class="op-amount font-weight-bold">{{dolares_en_caja}}</td>
+      
+    </tr>
+
+     <tr>
+
+
+      <td><strong> VENTA TOTAL $:</strong></td>
+      <td class="op-amount font-weight-bold">{{venta_total_dolares}}</td>
+      
+    </tr>
+
+     <tr>
+      
+      <td><strong> VENTA TOTAL BsS.:</strong></td>
+  <strong>    <td class="op-amount font-weight-bold">{{venta_total_bolivares}}</td> </strong>
+      
+    </tr>
+
+  </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

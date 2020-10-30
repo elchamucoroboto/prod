@@ -1,0 +1,1 @@
+web: gunicorn dcaja_project.wsgi
